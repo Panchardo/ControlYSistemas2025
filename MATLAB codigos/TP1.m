@@ -68,8 +68,27 @@ legend('filter', 'Analítica');
 hold off;
 
 %EJ 5
+H = filt([1],[1 -0.5 -0.1 -0.2])
+X = filt([1], [1 -1])
+Y5 = X * H
 
-Y5 = filt([1], [1 -1]) * filt([1],[1 -0.5 -0.1 -0.2])
+N = 20; % Número de muestras
+x = ones(1, N); % Escalón unitario
+yi = [1 2 3]
 
+num = cell2mat(H.num)
+den = cell2mat(H.den)
+% Calcular estados iniciales
+zi = filtic(b, a, yi, x);
 
+% Filtrar la señal de entrada con las condiciones iniciales
+y = filter(b, a, x, zi);
 
+% Graficar la respuesta en el tiempo
+stem(0:N-1, y, 'filled');
+xlabel('n');
+ylabel('y[n]');
+title('Respuesta del sistema en el dominio del tiempo EJ5');
+grid on;
+
+poles = roots(a)
