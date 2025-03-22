@@ -25,7 +25,7 @@ void main(void) {
     int64_t X_fixed = (int64_t)(X1 * (1 << n));  //Se multiplica el numero por 2^n, lo que equivale a correr la coma n lugares a la derecha. 
                                                 //En el caso de 10.1000111101, queda 1010001111.01. Pero lo estamos guardando en un entero, entonces se guarda 101000111101, 
                                                 //con muchos ceros a la izquierda de ese numero, porque tiene 64 bits. Ese numero en decimal es 2621
-    printf("X_fixed = %d \n", X_fixed );
+    printf("X_fixed = %ld \n", X_fixed );
 
     // Aplicar truncamiento y redondeo
     int32_t x_trunc = truncation(X_fixed); // Al truncar, 1010 0011 1101 se desplaza n lugares a la derecha (10 en este caso, quedando 000000000010  (con muchos ceros a la derecha porque tiene 32 bits ahora), lo cual es 2. 
