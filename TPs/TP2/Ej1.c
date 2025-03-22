@@ -25,7 +25,7 @@ s1 = -2
 s2 = -1 
 
 Ej 1.1) No son los valores correctos. Deberian dar c = 254 y d = 16129
-EJ 1.2) Para arreglarlo, podriamos cambiar el tipo de variable a uno que admita mas bits. Ejemplo 
+EJ 1.2) Para arreglarlo, podriamos cambiar el tipo de variable a uno que admita mas bits. Ejemplo uint32_t
 EJ 1.3) Los resultados son correctos porque correr dos bits a la derecha significa dividir por 2^2, y -8/4 = -2. Lo mismo con -1/2^5 = -1
 
 
