@@ -21,7 +21,7 @@ void main(void){
     int32_t a_sat = saturation(a);
     int32_t b_sat = saturation(b);
 
-    int64_t suma = (int64_t)a_sat +  (int64_t)b_sat;
+    int64_t suma = (int64_t)a_sat + (int64_t)b_sat;
     int32_t suma_sat = saturation(suma);
     
     printf("Suma = %d \n", suma_sat);
