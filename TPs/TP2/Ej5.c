@@ -70,7 +70,7 @@ void main(void) {
 
     printf("Multiplicacion 32 bits truncada: %d\n", result_trunc); //155980 ---> En Q21.10 es: 10011000.0101001100 = 152.32421875 (no deberia ser un entero truncado?)
     printf("En Q21.10: %.5f\n", (float)result_trunc/(1<<n)); //155982 ---> En Q21.10 es :10011000.0101001110 = 152.326171875 (no deberia ser un entero redondeado?)
-    printf("Multiplicacion 64 bits redondeada: %d\n", result_redond); //155982 ---> En Q21.10 es :10011000.0101001110 = 152.326171875 (no deberia ser un entero redondeado?)
+    printf("Multiplicacion 64 bits redondeada: %d\n", result_redond);
     printf("En Q21.10: %.5f\n", (float)result_redond/(1<<n));
     printf("Multiplicacion con double: %.2f", acum_db); //152.35
 
@@ -84,4 +84,13 @@ void main(void) {
     printf("Operacion MAC en punto fijo Q21.10\n");
     printf("Resultado en punto fijo (en Q21.10): %ld\n", result);
     printf("Resultado en formato decimal: %.6f\n", result_decimal);
+*/
+
+/* 
+EJ 6:Suponga que debe implementar un filtro digital con un procesador DSP de 16 bits. El mismo cuenta
+con un acumulador de 40 bits en su ALU. Calcule cuántas sumas consecutivas puede realizar
+garantizando que no se producirá un overflow.
+
+SUMANDOS DE 16 BITS. La cuenta es 40 = 16 + log2(s) ---> despejando s ---> 16.777.216 sumandos se pueden sumar sin producir overflow
+
 */

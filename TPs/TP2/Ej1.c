@@ -3,7 +3,7 @@
 #include <stdint.h>
 void main(void)
 {
-uint32_t a, b, c, d, s1, s2;
+signed char a, b, c, d, s1, s2;
 a = 127; // 0 1111111
 b = 127; // 0 1111111
 c = a + b; // 1 1111110 = -2 = -128 + 64 + 32 + 16 + 8 + 4 + 2
