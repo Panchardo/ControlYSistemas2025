@@ -6,7 +6,7 @@
 // compile: gcc -Wall -std=c99 ex_01.c -o ex_01
 
 #include <stdio.h>
-#include <float.h>
+#include <float.h> 
 #include <math.h>
 #include <fenv.h>
 

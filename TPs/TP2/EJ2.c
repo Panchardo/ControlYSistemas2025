@@ -16,4 +16,3 @@ void main(void){
     float c = fx2fp(fp2fx(2.4515, 10), 10);
     printf("Q21.10: %f", c); // 2.451172
 }
-

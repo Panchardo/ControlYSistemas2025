@@ -37,7 +37,7 @@ int32_t mac64BIT(int64_t X[], int64_t Y[], int8_t size) {
         result += (( X[i] * Y[i]));  // Multiplicamos los valores y acumulamos
     //    printf("i = %d; result = %ld", i,result);
     }
-    int32_t result_redondeado = rounding(result);
+    int32_t result_redondeado = truncation(result);
     return result_redondeado;
 }
 
