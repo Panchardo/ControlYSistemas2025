@@ -4,13 +4,22 @@
 
 // Compile usando el siguiente comando
 // compile: gcc -Wall -std=c99 ex_01.c -o ex_01
+// -Wall
+// This enables all the warnings about constructions that some users consider questionable, 
+// and that are easy to avoid (or modify to prevent the warning), even in conjunction with macros. 
+// This also enables some language-specific warnings described
 
+//-std = XXX
+
+//Determine the language standard. See Language Standards Supported by GCC, for details of these standard versions. This option is currently only supported when compiling C or C++.
+// The compiler can accept several base standards, such as ‘c90’ or ‘c++98’, and GNU dialects of those standards, such as ‘gnu90’ or ‘gnu++98’.
+// When a base standard is specified, the compiler accepts all programs following that standard plus those using GNU extensions that do not contradict it
 #include <stdio.h>
 #include <float.h> 
 #include <math.h>
 #include <fenv.h>
 
-typedef long int int64_t;
+typedef long int int64_t; // cuando declare una variable como int64_t, en realidad la estoy declarando long int
 
 int main(void)
 {	
