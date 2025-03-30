@@ -41,7 +41,7 @@ void fpe_handler(int sig){
 
 int main(void)
 { 
-  //~ feclearexcept (FE_ALL_EXCEPT);
+  //~ ¿feclearexcept (FE_ALL_EXCEPT);
   //~ feenableexcept(FE_ALL_EXCEPT); 
    	
   //~ signal(SIGFPE, fpe_handler);

@@ -38,7 +38,7 @@ int main(void)
       
   /* Temporarily raise other exceptions */
   feclearexcept(FE_ALL_EXCEPT); //  Limpia todas las excepciones de punto flotante previamente activadas.
-  feraiseexcept(FE_INEXACT); // Lanza la excepcion correspondiente. FE_INEXACT es resultado inexacto
+  feraiseexcept(FE_INEXACT); // feraisexcept() Lanza la excepcion correspondiente. FE_INEXACT es resultado inexacto
   show_fe_exceptions();
     
   feclearexcept(FE_ALL_EXCEPT);
@@ -50,11 +50,11 @@ int main(void)
   show_fe_exceptions();
 
   feclearexcept(FE_ALL_EXCEPT);
-  feraiseexcept(FE_OVERFLOW);
+  feraiseexcept(FE_OVERFLOW); // Excepcion por overflow
   show_fe_exceptions();
 
   feclearexcept(FE_ALL_EXCEPT);
-  feraiseexcept(FE_UNDERFLOW);
+  feraiseexcept(FE_UNDERFLOW); // Excepcion por underflow
   show_fe_exceptions();
   
   feclearexcept(FE_ALL_EXCEPT);
