@@ -41,10 +41,9 @@ void fpe_handler(int sig){
 
 int main(void)
 { 
-  //~ ¿feclearexcept (FE_ALL_EXCEPT);
-  //~ feenableexcept(FE_ALL_EXCEPT); 
-   	
-  //~ signal(SIGFPE, fpe_handler);
+   feclearexcept (FE_ALL_EXCEPT);
+   feenableexcept(FE_ALL_EXCEPT);  	
+   signal(SIGFPE, fpe_handler);
     
   /* Setup a "current" set of exception flags. */
   feraiseexcept(FE_INVALID);
@@ -62,3 +61,18 @@ int main(void)
    
   return 0;
 }
+
+
+/*
+Con lineas 44, 45 y 46 comentadas este es el output:
+current exceptions raised:  FE_INVALID
+current exceptions raised:  FE_INEXACT FE_OVERFLOW
+
+Con las lineas 44, 45 descomentadas:
+Floating point exception (core dumped)
+
+Con las lineas 44, 45 y 46 descomentadas:
+UPS! Floating Point Exception 
+current exceptions raised:  none
+
+*/
