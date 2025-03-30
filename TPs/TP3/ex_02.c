@@ -7,7 +7,7 @@
 
 //-lm Enlaza la biblioteca matemática (libm), necesaria para funciones como sin(), cos(), sqrt(), etc. Esto es porque math.h no es parte de la libreria estandar de C.
 // frounding-math desactiva el redondeo por defecto y le dice al compilador que el programa cambia el modo de redondeo dinamicamente
-// -fsignaling-nans 
+// -fsignaling-nans habilita el uso de NaNs señalizados (sNaNs), provocando excepciones (FE_INVALID) cuando se usan en operaciones.
 
 #include <stdio.h>
 #include <float.h>
