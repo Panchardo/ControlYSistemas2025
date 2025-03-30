@@ -42,7 +42,7 @@ int main(void)
 	// Para obtener ese producto se suman los exponentes y se multiplican las mantisas y luego se multiplica la mantisa resultante por 2^exponente resultante.
 	// Volviendo al resultado anterior, tenemos que normalizarlo para que quede solo un numero antes de la coma, osea que tenemos que correr la coma y sumar 1 al exponente, es decir, 
 	// 1.0001110000110111100100110111111000001 ∙ 2^(181 − bias). Ahora se produce un redondeo para arriba, 
-	// pues al final de multiplicar las mantisas y sumar los exponentes (e1+e2+2bias-bias), queda 1.00011100001101111001001 10111111000001 ∙ 2^(181 − bias) como ya vimos y, 
+	// pues al final de multiplicar las mantisas y sumar los exponentes (E = e1+e2-2bias+bias), queda 1.00011100001101111001001 10111111000001 ∙ 2^(181 − bias) como ya vimos y, 
 	// como la mantisa para un float de 32 bits tiene 23 bits, entonces 1.00011100001101111001001 ∙ 2^(181 − bias), pero como el bit de despues del menos significativo es un 1,
 	// el compilador automaticamente redondea para arriba en vez de truncar, quedando como resultado 1.00011100001101111001010 ∙ 2^(181 − bias). Si fuera 0, hubiera redondeado para 
 	// abajo y el resultado habria sido menor al real. El resultado final en decimal es 20000000545128448 (el resultado real es 2e16)
