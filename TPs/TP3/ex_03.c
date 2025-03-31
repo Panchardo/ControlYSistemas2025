@@ -19,4 +19,9 @@ NaN: nan
 +Inf: inf
 -Inf: -inf
 
+LINUX
+NaN: nan
++Inf: inf
+-Inf: -inf
+
 */

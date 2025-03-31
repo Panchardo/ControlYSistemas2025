@@ -74,7 +74,12 @@ int main(void)
 	Current Round Mode = 0
  	exp(1.1) = +3.00416613 En formato punto flotante es 0 10000000 100 0000 0100 0100 0100 0010 que es 3.004166126251220703125.., que es un numero mas grande que el original. Esto porque, como hay un 1 en el bit despues del menos significante, se redondeo para arriba.
 	-exp(1.1) = -3.00416613 Tiene sentido que sea igual con signo contrario, porque redondean hacia el entero mas cercano. Aqui seria como redondear hacia abajo
-	double exp(1.1) = +3.00416602 // 3.00416602394640008810 es el numero mas completo, se redondea. El numero con coma en binario es 1.1000000010001000100000110010010001001101010101000111(1)*2^1. Se ha redondeado para arriba tambien por ese 1 que aparece.
+	double exp(1.1) = +3.0041660239464334 // 3.00416602394640008810 es el numero mas completo, se redondea. El numero con coma en binario es 1.1000000010001000100000110010010001001101010101000111(1)*2^1. Se ha redondeado para arriba tambien por ese 1 que aparece.
+	EN LINUX
+	Current Round Mode = 0 
+	exp(1.1) = +3.00416613
+	-exp(1.1) = -3.00416613
+	double exp(1.1) = +3.0041660239464334
 	*/
 	printf("\n");
 	
@@ -86,7 +91,13 @@ int main(void)
 	Current Round Mode = 1024
 	exp(1.1) = +3.00416589 // aca redondeo para -inf. El numero en punto flotante queda 0 10000000 100 0000 0100 0100 0100 0001, que en decimal es 3.004165887...
 	-exp(1.1) = -3.00416613 // Redondeo para -inf tambien, queda igual que el caso de redondeo anterior pues redondear para -inf es tambien redondear al entero mas cercano
-	double exp(1.1) = +3.00416602
+	double exp(1.1) = +3.0041660239464330
+
+	EN LINUX
+	Current Round Mode = 1024 
+	exp(1.1) = +3.00416588
+	-exp(1.1) = -3.00416613
+	double exp(1.1) = +3.0041660239464333
 	*/
 	printf("\n");
 	
@@ -98,7 +109,13 @@ int main(void)
 	Current Round Mode = 2048
 	exp(1.1) = +3.00416613 //Ahora se redondea para +inf, se invierten los casos con respecto al de redondeo para abajo.
 	-exp(1.1) = -3.00416589
-	double exp(1.1) = +3.00416602
+	double exp(1.1) = +3.0041660239464334
+
+	EN LINUX
+	Current Round Mode = 2048 
+	exp(1.1) = +3.00416613
+	-exp(1.1) = -3.00416588
+	double exp(1.1) = +3.0041660239464334
 	*/
 	printf("\n");
 
@@ -110,7 +127,12 @@ int main(void)
 	Current Round Mode = 3072
 	exp(1.1) = +3.00416589 //Truncamiento. Con o sin signo el numero es el mismo.
 	-exp(1.1) = -3.00416589
-	double exp(1.1) = +3.00416602
+	double exp(1.1) = +3.0041660239464330
+
+	Current Round Mode = 3072 
+	exp(1.1) = +3.00416588
+	-exp(1.1) = -3.00416588
+	double exp(1.1) = +3.0041660239464333
 	*/
 	printf("\n");
 	return 0;
@@ -154,4 +176,41 @@ Current Round Mode = 3072
  exp(1.1) = +3.00416589
 -exp(1.1) = -3.00416589
 double exp(1.1) = +3.0041660239464330
+
+LINUX
+** Floating-point single-precision constants ** 
+FLT_MIN         = 1.175494E-38 
+FLT_MAX         = 3.402823E+38 
+FLT_EPSILON     = 1.192093E-07 
+
+** Floating-point double-precision constants ** 
+DBL_MIN         = 2.225074E-308 
+DBL_MAX         = 1.797693E+308 
+DBL_EPSILON     = 2.220446E-16 
+
+** Floating point rounding modes ** 
+Rounding Mode FE_TONEAREST      = 0 
+Rounding Mode FE_DOWNWARD       = 1024 
+Rounding Mode FE_UPWARD         = 2048 
+Rounding Mode FE_TOWARDZERO     = 3072 
+
+Current Round Mode = 0 
+ exp(1.1) = +3.00416613
+-exp(1.1) = -3.00416613
+double exp(1.1) = +3.0041660239464334
+
+Current Round Mode = 1024 
+ exp(1.1) = +3.00416588
+-exp(1.1) = -3.00416613
+double exp(1.1) = +3.0041660239464333
+
+Current Round Mode = 2048 
+ exp(1.1) = +3.00416613
+-exp(1.1) = -3.00416588
+double exp(1.1) = +3.0041660239464334
+
+Current Round Mode = 3072 
+ exp(1.1) = +3.00416588
+-exp(1.1) = -3.00416588
+double exp(1.1) = +3.0041660239464333
 */

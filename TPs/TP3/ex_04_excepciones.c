@@ -51,7 +51,7 @@ int main(void){
     feclearexcept(FE_ALL_EXCEPT);
 
     float underflow = FLT_MIN/(1<<31);
-    printf("Overflow = %f\n", underflow);
+    printf("Underflow = %f\n", underflow);
     show_fe_exceptions();
     feclearexcept(FE_ALL_EXCEPT);
 
@@ -72,7 +72,21 @@ raiz de -1 = nan
 current exceptions raised:  none
 Overflow = inf
 current exceptions raised:  FE_INEXACT FE_OVERFLOW
-Overflow = -0.000000
+Underflow = -0.000000
+current exceptions raised:  FE_INEXACT FE_UNDERFLOW
+
+En LINUX
+1.0/0.0 = inf
+current exceptions raised:  FE_DIVBYZERO
+1.0/10.0 = 0.100000
+current exceptions raised:  FE_INEXACT
+0.0/0.0 = -nan
+current exceptions raised:  FE_INVALID
+raiz de -1 = -nan
+current exceptions raised:  FE_INVALID
+Overflow = inf
+current exceptions raised:  FE_INEXACT FE_OVERFLOW
+Underflow = -0.000000
 current exceptions raised:  FE_INEXACT FE_UNDERFLOW
 
 */

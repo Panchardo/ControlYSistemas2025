@@ -42,10 +42,14 @@ void fpe_handler(int sig){
 int main(void)
 { 
    feclearexcept (FE_ALL_EXCEPT);
-   feenableexcept(FE_ALL_EXCEPT);  	
-   signal(SIGFPE, fpe_handler);
+   feenableexcept(FE_ALL_EXCEPT); //lo que hace esto es habilitar las INTERRUPCIONES por excepciones de punto flotante, lo que hace que se detenga el programa
+                                  // cuando detecta una. 
+   signal(SIGFPE, fpe_handler); // SIGFPE es una señal que reporta un error fatal aritmetico. Aunque el nombre haga referencia a "Floating Point Exception", tambien
+                                // cubre todos los errores aritmeticos, como division por cero u overflow. La funcion signal hace que cuando detecte la señal SIGFPE,
+                                // se ejecute la funcion fpe_handler, en lugar de solo detener el programa. Lo que hace es asignar un manejador de señales a la señal SIGFPE
     
   /* Setup a "current" set of exception flags. */
+  /**/
   feraiseexcept(FE_INVALID);
   show_fe_exceptions();
 
@@ -74,6 +78,8 @@ Floating point exception (core dumped)
 
 Con las lineas 44, 45 y 46 descomentadas:
 UPS! Floating Point Exception 
-current exceptions raised:  none
+current exceptions raised:  none // probablemente se imprima none porque por algun motivo el sistema limpia automáticamente los flags de excepción antes de ejecutar el manejador.
+
+
 
 */
