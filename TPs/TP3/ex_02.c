@@ -115,3 +115,43 @@ int main(void)
 	printf("\n");
 	return 0;
 }
+
+/*
+OUTPUT
+WINDOWS
+** Floating-point single-precision constants ** 
+FLT_MIN         = 1.175494E-38
+FLT_MAX         = 3.402823E+38
+FLT_EPSILON     = 1.192093E-07
+
+** Floating-point double-precision constants **
+DBL_MIN         = 2.225074E-308
+DBL_MAX         = 1.797693E+308 
+DBL_EPSILON     = 2.220446E-16
+
+** Floating point rounding modes **
+Rounding Mode FE_TONEAREST      = 0
+Rounding Mode FE_DOWNWARD       = 1024 
+Rounding Mode FE_UPWARD         = 2048
+Rounding Mode FE_TOWARDZERO     = 3072
+
+Current Round Mode = 0 
+ exp(1.1) = +3.00416613
+-exp(1.1) = -3.00416613
+double exp(1.1) = +3.0041660239464334
+
+Current Round Mode = 1024 
+ exp(1.1) = +3.00416589
+-exp(1.1) = -3.00416613
+double exp(1.1) = +3.0041660239464330
+
+Current Round Mode = 2048
+ exp(1.1) = +3.00416613
+-exp(1.1) = -3.00416589
+double exp(1.1) = +3.0041660239464334
+
+Current Round Mode = 3072 
+ exp(1.1) = +3.00416589
+-exp(1.1) = -3.00416589
+double exp(1.1) = +3.0041660239464330
+*/

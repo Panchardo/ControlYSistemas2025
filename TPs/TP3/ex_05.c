@@ -64,6 +64,7 @@ int main(void)
 
 
 /*
+SOLO FUNCIONA EN LINUX
 Con lineas 44, 45 y 46 comentadas este es el output:
 current exceptions raised:  FE_INVALID
 current exceptions raised:  FE_INEXACT FE_OVERFLOW

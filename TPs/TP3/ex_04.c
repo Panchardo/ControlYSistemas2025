@@ -77,3 +77,15 @@ FE_UNDERFLOW → El resultado de una operación de punto flotante anterior fue s
 
 FE_ALL_EXCEPT → OR bit a bit de todas las excepciones de punto flotante admitidas.
 */
+
+/*
+OUTPUT:
+Current Round Mode = 0 
+current exceptions raised:  none
+current exceptions raised:  FE_INEXACT
+current exceptions raised:  FE_INVALID
+current exceptions raised:  FE_DIVBYZERO
+current exceptions raised:  FE_OVERFLOW
+current exceptions raised:  FE_UNDERFLOW
+current exceptions raised:  FE_INEXACT FE_OVERFLOW
+*/

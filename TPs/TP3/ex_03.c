@@ -12,3 +12,11 @@ int main() {
 
     return 0;
 }
+/*
+OUTPUT
+WINDOWS
+NaN: nan
++Inf: inf
+-Inf: -inf
+
+*/

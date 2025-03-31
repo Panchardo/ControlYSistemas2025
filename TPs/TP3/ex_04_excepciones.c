@@ -57,3 +57,22 @@ int main(void){
 
 
 }
+
+/*
+OUTPUT
+EN WINDOWS
+
+1.0/0.0 = inf
+current exceptions raised:  FE_DIVBYZERO
+1.0/10.0 = 0.100000
+current exceptions raised:  FE_INEXACT
+0.0/0.0 = nan
+current exceptions raised:  FE_INVALID
+raiz de -1 = nan
+current exceptions raised:  none
+Overflow = inf
+current exceptions raised:  FE_INEXACT FE_OVERFLOW
+Overflow = -0.000000
+current exceptions raised:  FE_INEXACT FE_UNDERFLOW
+
+*/
