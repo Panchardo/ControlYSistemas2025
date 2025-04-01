@@ -73,11 +73,11 @@ int main(void)
 	double acum_1, acum_2;
 	
 	acum_1 = 0.0;
-	for (int64_t i = 0; i < 10000000; i++){ acum_1 += 0.01; } 
+	for (int64_t i = 0; i < 10000000; i++){ acum_1 += (float)0.01; } 
 	/*
 	El resultado deberia ser 100000, pero da 99999.999986. Esto es porque basicamente se esta multiplicando 0.01 x 10000000. El 0.01 en binario se escribe de manera periodica, no tiene una representacion finita
-	por lo que cada vez que se suma se introduce un error debido a la aproximacion que se le hace.
-
+	por lo que cada vez que se suma se introduce un error debido a la aproximacion que se le hace. Tambien influye que en las ultimas sumas se suman un numero muy grande con uno muy chico.
+	Declarado como float, el numero es 99999.997765.
 	*/
 
 	acum_2 = 0.0;

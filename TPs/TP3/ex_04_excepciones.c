@@ -21,6 +21,7 @@ void show_fe_exceptions(void)
     if(fetestexcept(FE_OVERFLOW))      printf(" FE_OVERFLOW");
     if(fetestexcept(FE_UNDERFLOW))     printf(" FE_UNDERFLOW");
     if(fetestexcept(FE_ALL_EXCEPT)==0) printf(" none");
+    if(fetestexcept(FE_DENORMAL))      printf(" FE_DENORM");
     printf("\n");
 }
 
