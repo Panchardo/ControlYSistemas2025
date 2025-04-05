@@ -1,0 +1,19 @@
+La cuantización se hace a través de una variable de 16 bits con signo. Entonces los valores mínimos de la señal serán representados con -2^15 y los máximos con 2^15. 
+Pero también el ADC tiene un rango de 0 a 5V, es decir que todo lo que esté abajo de 0 se recortará y el ADC tendrá un OUTPUT de 2^15 (32768). Hay saturación del ADC.
+Como el valor máx de la señal es de 2.5V, este será representado con el punto medio de la representación en 16 bits (es decir, 0). Para poder cubrir toda la señal, es necesario
+bajar el mínimo a por ejemplo -5V, o bien sumar una componente de continua (offset) a la señal y luego restarla al momento de procesar la señal. Ambas soluciones sirven 
+para que la señal no se recorte, pero tienen valores diferentes de cuantizacion. 
+
+Para la solucion de aumentar el rango:
+
+-5V --> -2^15
+5V ---> 2^15
+
+El error de cuantizacion es: (5-(-5))/2^16 = 0.00015258
+
+Para la solución de offset:
+
+0V ---> -2^15
+5V ---> 2^15
+
+El error de cuantización es: 5-0/2^16 =  7.62939e-5
