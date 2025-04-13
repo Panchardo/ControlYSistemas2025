@@ -72,6 +72,6 @@ void mexFunction( int nlhs, mxArray *plhs[],
     /* call the computational C routine */
     
     fir_online_float(input, output);
-//     fir_online_fixed(input, output);
+//   fir_online_fixed(input,1001, output);
     
  }

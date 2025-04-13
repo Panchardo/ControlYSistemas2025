@@ -74,5 +74,5 @@ plot(f1, mag_s, '-k')
 hold on
 plot(f2, maf_f, '--b')
 plot(f2, maf_m, '--r')
-legend('INPUT SIGNAL' , 'FIR OUTPUT MATLAB', 'FIR OUTPUT C') %% esto está al reves. No se corresponde con lo que se muestra en el diagrama de tiempo
+legend('INPUT SIGNAL' , 'FIR OUTPUT C', 'FIR OUTPUT MATLAB') %% esto está al reves. No se corresponde con lo que se muestra en el diagrama de tiempo
 grid on
