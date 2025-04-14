@@ -22,7 +22,7 @@ Fs = 10000;  % Sampling frequency
 dt = 1/Fs;
 t = (0:dt:dt*1000)';
 
-adc_signal = sin(2 * pi * Fn1 * t) + sin(2 * pi * Fn2 * t) + 0.25 * sin(2 * pi * Fn3 * t);
+adc_signal = sin(2 * pi * Fn1 * t) + sin(2 * pi * Fn2 * t) + 0.25 * sin(2 * pi * Fn3 * t); %+ sin(2*pi*900*t);
 
 % Input signal must be in float, not double
 adc_signal_f = single(adc_signal); %% eso es porque se va a usar en fir_wrapper.c, que utiliza floats en vez de doubles como MATLAB
@@ -76,3 +76,9 @@ plot(f2, maf_f, '--b')
 plot(f2, maf_m, '--r')
 legend('INPUT SIGNAL' , 'FIR OUTPUT C', 'FIR OUTPUT MATLAB') %% esto está al reves. No se corresponde con lo que se muestra en el diagrama de tiempo
 grid on
+
+clear fir_wrapper.mexw64
+%% DUDAS
+% 1. Diferentes amplitudes de cada frecuencia
+
+% 3. Filtro online con fixed tampoco. Filtro offline en c tampoco.

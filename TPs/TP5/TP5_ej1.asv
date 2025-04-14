@@ -23,7 +23,7 @@ f_corte = 2 * frecuencia_seno;
 N_max = floor(fs / (2*f_corte));
 
 
-windowSize = N_max * 10; %Cambiar a /2 y *10
+windowSize = N_max; %Cambiar a /2 y *10
 b = (1/windowSize)*ones(1,windowSize);
 a = 1;
 
