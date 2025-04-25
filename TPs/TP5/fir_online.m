@@ -77,8 +77,6 @@ plot(f2, maf_m, '--r')
 legend('INPUT SIGNAL' , 'FIR OUTPUT C', 'FIR OUTPUT MATLAB') %% esto está al reves. No se corresponde con lo que se muestra en el diagrama de tiempo
 grid on
 
-clear fir_wrapper.mexw64
+%clear fir_wrapper.mexw64
 %% DUDAS
 % 1. Diferentes amplitudes de cada frecuencia
-
-% 3. Filtro online con fixed tampoco. Filtro offline en c tampoco.

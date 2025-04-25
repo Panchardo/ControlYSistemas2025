@@ -72,5 +72,5 @@ xlim([0 Fs/2]);
 
 %sound(signal, Fs);
 %sound(signal_noise, Fs);
-sound(signal_filtered, Fs);
+%sound(signal_filtered, Fs);
 
