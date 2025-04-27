@@ -16,4 +16,5 @@ printsys(num,den)
 sys = tf(num,den)
 
 step(sys)
+figure
 bode(sys)
