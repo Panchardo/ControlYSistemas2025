@@ -15,7 +15,7 @@ periodo_muestreo = 1/frec_muestreo;  % Periodo de muestreo
 t = tiempo_inicio:periodo_muestreo:tiempo_final; % Vector de tiempo
 
 % Generación de la señal senoidal
-signal = sin(2*pi*frecuencia*t)+5;
+signal = sin(2*pi*frecuencia*t);
 
 % Graficación
 figure;
