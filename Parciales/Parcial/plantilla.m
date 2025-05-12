@@ -3,7 +3,7 @@ clc; clear; close all;
 %% Parámetros
 fs = 1000;            % Frecuencia de muestreo (Hz)
 T = 1/fs;             % Periodo de muestreo
-tmax = 0.013;
+tmax = 2;
 t = 0:T:tmax;         % Vector de tiempo
 
 %% Señal (ejemplo: combinación de senoidales)
