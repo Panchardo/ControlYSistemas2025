@@ -27,7 +27,7 @@ alpha = deg2rad(2);
 % ue=                   % Pedal position [rad]
 % de=                   % Slope [rad]
 
-x2e=15;                 
+x2e=20;                 
 x1e=0.5*rho*CD*Af*x2e^2+m*g*f;
 ue=rw*x1e/k/r;
 de=0;

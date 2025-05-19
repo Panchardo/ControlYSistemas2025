@@ -7,7 +7,7 @@ Jc=6250;                        % Chassis inertia [kgm^2]
 Jf=0.625;                       % Flywheel inertia [kgm^2]
 ds=1000;                        % Driveshaft damping coefficient [Nms/rad]
 cs=75000;                       % Driveshaft spring coefficient [Nm/rad]
-i=57;                           % Gear ratio [-]
+i=10;                           % Gear ratio [-]
 
 %---------------------------------------------------
 % Enter your A, B and H matrices here
@@ -33,11 +33,11 @@ p1 = [1 2*z*wn wn^2];
 p2 = [0 1 2*z*wn];
 p = conv(p1,p2)
 polos = roots(p)
-K = acker(A,B,polos)
-M = A - B*K;
-X = [0 1 0] * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
+%K = acker(A,B,polos)
+%M = A - B*K;
+%X = [0 1 0] * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
 % Finalmente, kr = -inv(Y)
-kr = -1 / X  % Si Y es escalar
+%kr = -1 / X  % Si Y es escalar
 
 %---------------------------------------------------
 % For simulation purposes (do not modify)

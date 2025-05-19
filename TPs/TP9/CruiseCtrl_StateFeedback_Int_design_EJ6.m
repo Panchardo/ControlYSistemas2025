@@ -46,6 +46,17 @@ D=[0];
 
 Aaug = [A [0;0]; C 0]
 Baug = [B;0]
+wn = 0.6;
+z = 1/sqrt(2);
+p1 = [1 2*z*wn wn^2];
+p2 = [0 1 3*z*wn];
+p = conv(p1,p2)
+polos = roots(p)
+%Kaug = acker(Aaug,Baug,polos)
+%K = Kaug(1, 1:2)
+%Ki = Kaug(3)
+%M = A - B*K;
+
 Haug = [H;0]
 Caug = [C 0]
 
@@ -54,20 +65,9 @@ Caug = [C 0]
 % Enter your control design here
 %-----------------------------------------------------
 % ...
-z = 1/sqrt(2);
-wn = 0.6;
-p1 = [1 2*z*wn wn^2];
-p2 = [0 1 3*z*wn];
-p = conv(p1,p2)
-polos = roots(p)
-Kaug = acker(Aaug,Baug,polos)
-K = Kaug(1, 1:2)
-Ki = Kaug(3)
-M = A - B*K;
+%X = C * (M \ B)  
 
-X = C * (M \ B)  
-
-kr = -1 / X 
+%kr = -1 / X 
 %Kaug=
 
 %---------------------------------------------------
