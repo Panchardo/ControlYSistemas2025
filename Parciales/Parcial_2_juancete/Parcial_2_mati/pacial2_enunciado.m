@@ -8,14 +8,12 @@
 % de 3 a 4 cm pico.
 % (2 puntos)
 
-
 %Se conectan el resorte que, une el chasis con la rueda, en paralelo con el almotriguador.Todo este
 %conjunto se conecta en seie con el resorte de la rueda,luego se colocan
 %las mazas sobre cada nodo. Una conectada encima del resorte y amortiguador
 %y otra entre los elementos series. Luego se coloca el sensor de posicion
 %entre las dos puntos en los que se conectan las masas. Y finalmente se
 %colocan las fuerzas y velocidad entrantes
-
 %% Ejercicio 2. 
 % Considerando un sensor ideal de distancia para medir la compresión de
 % la suspensión:

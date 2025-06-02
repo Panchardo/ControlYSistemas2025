@@ -90,14 +90,18 @@ A_ss = [ 0 1 0 0
         k_s/m_u c_s/m_u -(k_s+k_t)/m_u -c_s/m_u]; 
 
 B_ss = [ 0
-         1/m_s
+         -1/m_s
          0
-         -1/m_u];
+         1/m_u];
 
 C_ss = [1 0 -1 0];
 D_ss = [0]';
      
 H = tf(ss(A_ss, B_ss, C_ss, D_ss))
+step(H)
 stepinfo(H)
 pidTuner(H, 'PID');
+
+
+
 
