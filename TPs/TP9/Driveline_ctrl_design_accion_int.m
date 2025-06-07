@@ -7,7 +7,7 @@ Jc=6250;                        % Chassis inertia [kgm^2]
 Jf=0.625;                       % Flywheel inertia [kgm^2]
 ds=1000;                        % Driveshaft damping coefficient [Nms/rad]
 cs=75000;                       % Driveshaft spring coefficient [Nm/rad]
-i=10;                           % Gear ratio [-]
+i=50;                           % Gear ratio [-]
 
 %---------------------------------------------------
 % Enter your A, B and H matrices here
@@ -17,7 +17,7 @@ i=10;                           % Gear ratio [-]
      1/i -1 0];
  B=[1/Jf;0;0];
  H= [0;-1/Jc; 0];
-
+ C = [0 1 0]
 
 %---------------------------------------------------
 % Enter your control design here
@@ -28,19 +28,26 @@ i=10;                           % Gear ratio [-]
 % K=
 % kr=
 z = 1/sqrt(2);
-wn = 6;
+wn = 40;
 p1 = [1 2*z*wn wn^2];
 p2 = [0 1 2*z*wn];
-p = conv(p1,p2)
+p3 = [0 1 0.005*z*wn];
+p = conv(p1,p2);
+p = conv(p,p3)
 polos = roots(p)
-K = acker(A,B,polos)
+
+
+%% CONTROL INTEGRAL AGREGADO POR LOS JIJEOS
+
+Aaug = [A [0;0;0]; C 0]
+Baug = [B;0]
+Kaug = acker(Aaug,Baug,polos)
+K = Kaug(1, 1:3)
+Ki = Kaug(4)
 M = A - B*K;
-X = [0 1 0] * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
+X = C * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
 % Finalmente, kr = -inv(Y)
 kr = -1 / X  % Si Y es escalar
-
-%% CONTROL INTEGRAL AGREGADO PORQUE ME DIO LA GANA
-
 
 %% ---------------------------------------------------
 % For simulation purposes (do not modify)
