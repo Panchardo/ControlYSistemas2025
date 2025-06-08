@@ -7,7 +7,7 @@ Jc=6250;                        % Chassis inertia [kgm^2]
 Jf=0.625;                       % Flywheel inertia [kgm^2]
 ds=1000;                        % Driveshaft damping coefficient [Nms/rad]
 cs=75000;                       % Driveshaft spring coefficient [Nm/rad]
-i=50;                           % Gear ratio [-]
+i=57;                           % Gear ratio [-]
 
 %---------------------------------------------------
 % Enter your A, B and H matrices here
@@ -30,7 +30,7 @@ i=50;                           % Gear ratio [-]
 z = 1/sqrt(2);
 wn = 40;
 p1 = [1 2*z*wn wn^2];
-p2 = [0 1 2*z*wn];
+p2 = [0 1 1*z*wn];
 p3 = [0 1 0.005*z*wn];
 p = conv(p1,p2);
 p = conv(p,p3)
@@ -38,17 +38,20 @@ polos = roots(p)
 
 
 %% CONTROL INTEGRAL AGREGADO POR LOS JIJEOS
-
-Aaug = [A [0;0;0]; C 0]
-Baug = [B;0]
-Kaug = acker(Aaug,Baug,polos)
-K = Kaug(1, 1:3)
-Ki = Kaug(4)
-M = A - B*K;
-X = C * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
-% Finalmente, kr = -inv(Y)
-kr = -1 / X  % Si Y es escalar
-
+% 
+% Aaug = [A [0;0;0]; C 0]
+% Baug = [B;0]
+% Kaug = acker(Aaug,Baug,polos)
+% K = Kaug(1, 1:3)
+% Ki = Kaug(4)
+% M = A - B*K;
+% X = C * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
+% % Finalmente, kr = -inv(Y)
+% kr = -1 / X  % Si Y es escalar
+% Br = [0 0 0 -1]'
+% sys = ss(Aaug - Baug*Kaug, Baug*kr+Br, [C 0], 0);
+% stepinfo(sys)
+% step(sys)
 %% ---------------------------------------------------
 % For simulation purposes (do not modify)
 %---------------------------------------------------
