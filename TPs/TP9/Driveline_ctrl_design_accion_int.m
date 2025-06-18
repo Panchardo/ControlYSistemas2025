@@ -38,21 +38,21 @@ polos = roots(p)
 
 
 %% CONTROL INTEGRAL AGREGADO POR LOS JIJEOS
-% 
-% Aaug = [A [0;0;0]; C 0]
-% Baug = [B;0]
-% Kaug = acker(Aaug,Baug,polos)
-% K = Kaug(1, 1:3)
-% Ki = Kaug(4)
-% M = A - B*K;
-% X = C * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
-% % Finalmente, kr = -inv(Y)
-% kr = -1 / X  % Si Y es escalar
-% Br = [0 0 0 -1]'
-% sys = ss(Aaug - Baug*Kaug, Baug*kr+Br, [C 0], 0);
-% stepinfo(sys)
-% step(sys)
-%% ---------------------------------------------------
+
+Aaug = [A [0;0;0]; C 0]
+Baug = [B;0]
+Kaug = acker(Aaug,Baug,polos)
+K = Kaug(1, 1:3)
+Ki = Kaug(4)
+M = A - B*K;
+X = C * (M \ B);  % Equivalente a inv(M)*Bu pero más estable
+% Finalmente, kr = -inv(Y)
+kr = -1 / X  % Si Y es escalar
+Br = [0 0 0 -1]'
+sys = ss(Aaug - Baug*Kaug, Baug*kr+Br, [C 0], 0);
+stepinfo(sys)
+step(sys)
+% ---------------------------------------------------
 % For simulation purposes (do not modify)
 %---------------------------------------------------
 

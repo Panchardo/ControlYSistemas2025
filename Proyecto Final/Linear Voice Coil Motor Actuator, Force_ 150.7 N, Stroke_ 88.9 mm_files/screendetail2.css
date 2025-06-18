@@ -1,0 +1,636 @@
+﻿@font-face {
+    font-family: 'MyriadWebPro';
+    font-weight: normal;
+    font-style: normal;
+
+}
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+}
+body {
+	background-color: #ffffff;
+	color: #000000; /*not sure what this does yet */;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	line-height: 14px;
+	margin: 0 0 0 0;
+/* Sets the margin properties for an element using shorthand notation (top, right, bottom, left) */padding: 0 0 0 0;
+/* Sets the padding properties for an element using shorthand notation (top, right, bottom, left) */text-align: center; /* Centers the page content container in IE 5 browsers. */;
+	
+	background-repeat: repeat-x;
+	width: 100%;
+	display: block;
+}
+/* Commonly used to style page titles. */
+h1 {
+	color: #000000;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+}
+/* Commonly used to style section titles. */
+h2 {
+	color: #000000;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+}
+h3 {
+	font-size: 14px;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+	line-height: 22px;
+}
+h3 a{
+	color: #000000;
+	text-decoration: none;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+}
+h3 a:link{
+	color: #000000;
+	text-decoration: none;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+}
+h3 a:hover{
+	color: #000000;
+	text-decoration: none;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+}
+h4 {
+	font-size: 14px;
+	font-family: MyriadWebPro, Helvetica, Arial, sans-serif;
+	color: #ffffff;
+	line-height: 15px;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+#footer .h4link a {
+	color: #ffffff;
+	text-decoration: none;
+}
+#footer .h4link a:link {
+	color: #ffffff;
+	text-decoration: none;
+}
+#footer .h4link a:hover {
+	color: #ffffff;
+	text-decoration: underline;
+}
+#footer .h4link a:visited {
+	color: #ffffff;
+	text-decoration: none;
+}
+/* Sets the style for unvisited links. AND SIDEBAR */
+a,  a:link {
+	color: #000000;
+	text-decoration: none;
+}
+/* Sets the style for links on mouseover. AND SIDEBAR */
+a:hover {
+	color: #fc1706;
+	text-decoration: none;
+}
+#outerWrapper {
+	margin: 0 auto 0 auto; /* Sets the margin properties for an element using shorthand notation (top, right, bottom, left) */
+	text-align: left; /* Redefines the text alignment defined by the body element. */
+	width: 970px;
+}
+#outerWrapper #header {   /*this is where the company logo goes */
+	height: 45px;
+	background-image: url(../images/moticont-header.jpg);
+	background-repeat: no-repeat;
+}
+#outerWrapper #topNavigation {
+	height: 29px;
+	margin-bottom: 7px;
+	border: 1px solid #323232;
+}
+#outerWrapper #contentWrapper {
+	overflow: hidden;
+	background-color: #FFF;
+	background-image: url(../art/detail-bg.jpg);
+	background-repeat: repeat-y;
+	color: #FFF;
+}
+#contentWrapper2 {
+	overflow: hidden;
+	background-color: #FFF;
+	padding-top: 15px;
+}
+#outerWrapper #contentWrapper #leftColumn1 {
+	float: left; /* Sets the padding properties for an element using shorthand notation (top, right, bottom, left) */
+	width: 130px;
+	background-color: #000;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	height: 800px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	
+
+	/* Background color and gradients */
+	
+	background: #e1dfdf;
+	background: -moz-linear-gradient(top, #e1dfdf, #e1dfdf);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#e1dfdf), to(#e1dfdf));
+}
+#outerWrapper #contentWrapper #leftColumn1 ul{
+	margin-left: 0px;
+	padding-left: 0px;
+	margin-top: 0px;
+	padding-top: 5px;
+}
+#outerWrapper #contentWrapper #rightColumn1 {
+	float: right; /* Sets the padding properties for an element using shorthand notation (top, right, bottom, left) */
+	width: 200px;
+}
+/* Contains the main page content. When using a mutliple column layout the margins will be set to account for the floated columns' width, margins, and padding. */
+#outerWrapper #contentWrapper #content {
+	font-size: 14px;
+	color: #000000;
+	line-height: 22px;
+	margin-top: 15;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 141px;
+	padding-top: 20px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+#content2 {
+	font-size: 12px;
+	line-height: 22px;
+	margin-top: 15;
+	margin-right: 10px;
+	margin-bottom: 0;
+	margin-left: 20px;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+	color: #333;
+}
+#outerWrapper #footer {
+	background-repeat: repeat-x;
+	color: #ffffff;
+	padding: 10px;
+	height: 210px;
+	width: 970px;
+	background: #908f8f;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+
+	background: -moz-linear-gradient(top, #908f8f, #0b0b0b);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#908f8f), to(#0b0b0b));
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#908f8f', endColorstr='#0b0b0b',GradientType=0 );
+}
+#footer ul{
+	list-style-type: square;
+	margin-top: 5px;
+	margin-left: 0px;
+	padding-top: 5px;
+	padding-left: 15px;
+	font-size: 11px;
+	line-height: 19px;
+}
+#footer a {
+	color: #FFF;
+	font-size: 12px;
+	text-decoration: none;
+}
+#footer a:link {
+	color: #EEEEEE;
+	text-decoration: none;
+}
+#footer a:hover {
+	color: #fa0303;
+	text-decoration: underline;
+}
+#topnav {
+}
+.logo{
+	display: block;
+	height: 58px;
+	width: 225px;
+	float: left;
+}
+#fblike{
+	float: right;
+	height: 21px;
+	width: 29px;
+}
+.navlinks a{
+	text-decoration: none;
+}
+.navlinks a:link{
+	text-decoration: none;
+}
+.navlinks a:hover{
+	text-decoration: none;
+	color: #333;
+}
+.navlinks ul{
+	list-style-type: square;
+	margin-left: 0px;
+	padding-left: 10px;
+}
+.h3linktext a{
+	color: #999;
+	text-decoration: underline;
+}
+.h3linktext a:link{
+	color: #999;
+	text-decoration: underline;
+}
+.h3linktext a:hover{
+	color: #FFF;
+	text-decoration: none;
+}
+ul.sidenav
+	{
+		
+}
+	ul.sidenav li a
+	{
+		
+}
+	ul.sidenav li a.on
+	{
+		background:yellow;
+		padding:2px 6px;
+}
+.selected {
+  color: red;
+}
+.sidenav ul li{
+	list-style-type: none;
+	padding: 0px;
+	font-size: 11px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+.sidenav li {
+	background-image:url(../art/blue-square.jpg);
+	background-position:0px 6px;
+	background-repeat:no-repeat;
+	list-style-type: none;
+	padding-top: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	padding-left: 15px;
+	font-size: 11px;
+	line-height: 19px;
+}
+.sidenav a {
+	color: #000000;
+	text-decoration: none;
+}
+.sidenav a:link {
+	color: #000000;
+	text-decoration: none;
+}
+.sidenav a:hover {
+	color: #fc1706;
+	text-decoration: none;
+}
+.sidenav a:active {
+	color: #000000;
+	text-decoration: none;
+}
+
+.tabs {
+	list-style-image: none;
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+#panes {
+	position:relative;
+	height: 800px;
+	width: 500px;
+	}
+#panes div {
+		top:0px;
+		left:0px;
+		display:none;		
+		position:absolute; 
+	}
+.specheader {
+	color: #FFF;
+}
+.modeldropdn select{
+	width: 100px;
+}
+#panecontent {
+	height: 1000px;
+}
+/* the overlayed element */
+.apple_overlay {
+	
+	/* initially overlay is hidden */
+	display:none;
+	
+	/* growing background image */
+	/* background-image:url(white.png);
+	
+	/* 
+		width after the growing animation finishes
+		height is automatically calculated
+	*/
+	width:602px;
+	height:665px;
+	
+	/* some padding to layout nested elements nicely  */
+	padding:35px;
+
+	/* a little styling */	
+	font-size:11px;
+}
+
+/* default close button positioned on upper right corner */
+.apple_overlay .close {
+	background-image:url(close.png);
+	position:absolute; right:5px; top:5px;
+	cursor:pointer;
+	height:35px;
+	width:35px;
+}
+/* black version of the overlay. simply uses a different background image */
+	div.apple_overlay.black {
+		background-image:url(transparent.png);		
+		color:#fff;
+}
+#sidenavbox {
+	border-bottom: dotted 1px #9EA3AA;
+	height: 25px;
+	width: 100%;
+	}
+#sidenavbox2 {
+	height: 25px;
+	width: 100%;
+	float: left;
+	}
+#sidenavbox3 {
+	margin-left: 8px;
+	width: 120px;
+	margin-top: 25px;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+#sidenavbox4 {
+	border-bottom: dotted 1px #9EA3AA;
+	height: 5px;
+	width: 100%;
+	margin-bottom: 15px;
+	}
+#div {
+	float: left;
+	width: 100%;
+	margin-top: 15px;
+}
+#panebox {
+	width: 100%;
+	margin-top: 15px;
+	color: #333;
+	margin-bottom: 20px;
+}
+#videobar {
+	height: 42px;
+	width: 687px;
+	background-image: url(../art/videobar.jpg);
+	background-repeat: repeat-x;
+	margin-bottom: 15px;
+}
+#toptext {
+	color: #333;
+	font-size: 12px;
+	line-height: 20px;
+	width: 850px;
+}
+.thumbimage {
+	border: 1px solid #CCC;
+}
+#listtext {
+	width: 250px;
+	text-align: center;
+	margin-bottom: 20px;
+	font-size: x-small;
+}
+#listbox {
+	width: 290px;
+}
+#spacerbox {
+	height: 25px;
+}
+.videotn {
+	margin-right: 10px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+.motorborder {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #efefef;
+}
+.tdmotor {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+}
+hr {
+	height: 1px;
+	border-width:0;
+	color: #CCC;
+}
+#BingResults {
+	font-size: 12px;
+	color: #333;
+}
+.cleardefault {
+	width: 140px;
+	color: #666;
+	border: 0px none #FFF;
+	padding-left: 10px;
+	padding-top: 2px;
+}
+.quikbutton {
+	height: 19px;
+	width: 23px;
+	padding: 0px;
+	background-color: #FFF;
+	color: #FFF;
+	font-size: 0px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	background-image: url(../art/magnify.jpg);
+	background-repeat: no-repeat;
+	line-height: 0px;
+}
+#socialbox {
+	height: 29px;
+	float: left;
+}
+#searchbox {
+	height: 22px;
+	margin-left: 25px;
+	margin-top: 4px;
+	background-color: #FFF;
+	width: 178px;
+	clear: right;
+	float: right;
+}
+#rightnav {
+	float: right;
+	width: 300px;
+}
+.h2header {
+	color: #FFF;
+	line-height: 24px;
+	margin-bottom: 10px;
+}
+.searchword {
+	color: #000;
+	padding-top: 10px;
+	padding-bottom: 15px;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+.ResultDesc {
+	color: #333;
+	margin-left: 15px;
+	margin-top: 0px;
+}
+.ResultTitle {
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 0px;
+	padding-bottom: 0px;
+}
+#wagmp_map_1 {
+	float: right;
+}
+.h2black {
+	color: #000;
+	font-size: 18px;
+	font-weight: bold;
+}
+.h3blue {
+	color: #09F;
+	font-size: 16px;
+	font-weight: bold;
+}
+.imgleft {
+	float: left;
+	margin-right: 15px;
+	margin-bottom: 15px;
+	border: 1px solid #CCC;
+}
+.imgright {
+	float: right;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	border: 1px solid #CCC;
+}
+#footernav {
+	margin-top: 10px;
+	float: left;
+}
+.imgaccess {
+	float: right;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	border: 1px solid #CCC;
+}
+.imgaccessleft {
+	float: left;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	border: 1px solid #CCC;
+}
+#newsbox {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #CCC;
+	padding-bottom: 10px;
+	width: 690px;
+	float: left;
+	color: #333;
+}
+.searchlinks {
+	font-size: 10px;
+}
+#partno {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+#bodytext {
+	color: #000;
+}
+.slide-wrap ul {
+	width: 682px;
+	height: 378px;
+	overflow: hidden;
+	margin: 0px;
+	padding: 0px;
+}
+
+.slide-wrap li {
+	list-style: none;
+	margin: 0;
+	padding: 0px;
+}
+
+.slide-wrap .bx-wrapper {
+	margin: 0 auto;
+}
+.slide-wrap .bx-prev {
+	position: absolute;
+	top: 150px;
+	left: 0px;
+	width: 31px;
+	height: 31px;
+	text-indent: -999999px;
+	background-image: url(../art/icon_arrow_left.png);
+	background-repeat: no-repeat;
+	background-position: 0 -31px;
+}
+.slide-wrap .bx-next {
+	position: absolute;
+	top: 150px;
+	right: 0px;
+	width: 31px;
+	height: 31px;
+	text-indent: -999999px;
+	background-image: url(../art/icon_arrow_right.png);
+	background-repeat: no-repeat;
+	background-position: 0 -31px;
+}
+
+.slide-wrap .bx-next:hover,
+.slide-wrap .bx-prev:hover {
+	background-position: 0 0;
+}
