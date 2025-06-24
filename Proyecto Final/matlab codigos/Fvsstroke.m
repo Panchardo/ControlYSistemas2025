@@ -25,9 +25,14 @@ I_cont = 5;                 % amperios
 % Constante de fuerza
 k = F_N ./ I_cont;          % N/A
 
+p = polyfit(x_mm, F_N, 6);
+y_fit = polyval(p, x_mm);
+
 % === Plot 1: Fuerza vs Stroke ===
 figure;
 plot(x_mm, F_N, 'r-o', 'LineWidth', 2, 'MarkerSize', 6);
+hold on
+plot(x_mm, y_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
 xlabel('Stroke [mm]');
 ylabel('Fuerza continua [N]');
 title('Fuerza continua vs. Posición');
