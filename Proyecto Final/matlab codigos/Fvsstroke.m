@@ -8,6 +8,9 @@ x_in = [ ...
     0.54401, 0.57732, 0.61064, 0.64395, 0.67727, 0.71058, 0.74389, 0.77721, ...
     0.81052, 0.84384, 0.87715, 0.91047, 0.94378, 0.97558, 0.99678 ];
 
+x_center = 0.5;
+x_in = x_in - x_center;
+
 F_lb = [ ...
     43.32553, 45.37782, 47.41985, 49.37980, 51.23712, 52.80713, 54.11034, ...
     55.18779, 56.03950, 56.64492, 57.11695, 57.40427, 57.60950, 57.73264, ...
@@ -26,7 +29,10 @@ I_cont = 5;                 % amperios
 k = F_N ./ I_cont;          % N/A
 
 p = polyfit(x_mm, F_N, 6);
+pk = polyfit(x_mm,k,6);
+
 y_fit = polyval(p, x_mm);
+k_fit = polyval(pk,x_mm);
 
 % === Plot 1: Fuerza vs Stroke ===
 figure;
@@ -36,14 +42,16 @@ plot(x_mm, y_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
 xlabel('Stroke [mm]');
 ylabel('Fuerza continua [N]');
 title('Fuerza continua vs. Posición');
-xlim([0 25.4])
+xlim([-12.7 12.7])
 grid on;
 
 % === Plot 2: k(x) vs Stroke ===
 figure;
 plot(x_mm, k, 'b-s', 'LineWidth', 2, 'MarkerSize', 6);
+hold on
+plot(x_mm, k_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
 xlabel('Stroke [mm]');
 ylabel('k(x) [N/A]');
 title('Constante de fuerza vs. Posición');
-xlim([0 25.4])
+xlim([-12.7 12.7])
 grid on;
