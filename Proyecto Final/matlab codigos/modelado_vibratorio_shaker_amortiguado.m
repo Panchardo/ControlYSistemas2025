@@ -9,7 +9,8 @@ m_cubesat = 1.33; %[kg] Masa Cubesat
 m_shaker = 100; %[kg]
 
 kem = 15761; % [N/m]
-kc = (2*pi*freqcubesat1*m_cubesat)^2;
+%kc = (2*pi*freqcubesat1*m_cubesat)^2;
+kc = 2.7955e+07;
 k_shaker = 5000; % [N/M]
 
 M = [m_cubesat 0 0;

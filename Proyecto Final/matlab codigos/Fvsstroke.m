@@ -19,7 +19,7 @@ F_lb = [ ...
     43.86938, 41.42202, 39.84175 ];
 
 % Conversión de unidades
-x_mm = x_in * 25.4;         % pulgadas → milímetros
+x_m = x_in * 25.4*10^(-3);         % pulgadas → ímetros
 F_N  = F_lb * 4.44822;      % libras → Newtons
 
 % Corriente continua nominal
@@ -28,30 +28,30 @@ I_cont = 5;                 % amperios
 % Constante de fuerza
 k = F_N ./ I_cont;          % N/A
 
-p = polyfit(x_mm, F_N, 6);
-pk = polyfit(x_mm,k,6);
+p = polyfit(x_m, F_N, 6);
+pk = polyfit(x_m,k,6);
 
-y_fit = polyval(p, x_mm);
-k_fit = polyval(pk,x_mm);
+y_fit = polyval(p, x_m);
+k_fit = polyval(pk,x_m);
 
 % === Plot 1: Fuerza vs Stroke ===
 figure;
-plot(x_mm, F_N, 'r-o', 'LineWidth', 2, 'MarkerSize', 6);
+plot(x_m, F_N, 'r-o', 'LineWidth', 2, 'MarkerSize', 6);
 hold on
-plot(x_mm, y_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
-xlabel('Stroke [mm]');
+plot(x_m, y_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
+xlabel('Stroke [m]');
 ylabel('Fuerza continua [N]');
 title('Fuerza continua vs. Posición');
-xlim([-12.7 12.7])
+xlim([-12.7 12.7]*10^-3)
 grid on;
 
 % === Plot 2: k(x) vs Stroke ===
 figure;
-plot(x_mm, k, 'b-s', 'LineWidth', 2, 'MarkerSize', 6);
+plot(x_m, k, 'b-s', 'LineWidth', 2, 'MarkerSize', 6);
 hold on
-plot(x_mm, k_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
-xlabel('Stroke [mm]');
+plot(x_m, k_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
+xlabel('Stroke [m]');
 ylabel('k(x) [N/A]');
 title('Constante de fuerza vs. Posición');
-xlim([-12.7 12.7])
+xlim([-12.7 12.7]*10^-3)
 grid on;
