@@ -9,7 +9,7 @@ x_in = [ ...
     0.81052, 0.84384, 0.87715, 0.91047, 0.94378, 0.97558, 0.99678 ];
 
 x_center = 0.5;
-x_in = x_in - x_center;
+x_in2 = x_in - x_center;
 
 F_lb = [ ...
     43.32553, 45.37782, 47.41985, 49.37980, 51.23712, 52.80713, 54.11034, ...
@@ -19,7 +19,8 @@ F_lb = [ ...
     43.86938, 41.42202, 39.84175 ];
 
 % Conversión de unidades
-x_m = x_in * 25.4*10^(-3);         % pulgadas → ímetros
+x_m = x_in * 25.4 %*10^(-3);         % pulgadas → ímetros
+x_m2 = x_in2 * 25.4 %*10^(-3);         % pulgadas → ímetros
 F_N  = F_lb * 4.44822;      % libras → Newtons
 
 % Corriente continua nominal
@@ -35,23 +36,24 @@ y_fit = polyval(p, x_m);
 k_fit = polyval(pk,x_m);
 
 % === Plot 1: Fuerza vs Stroke ===
-figure;
-plot(x_m, F_N, 'r-o', 'LineWidth', 2, 'MarkerSize', 6);
-hold on
-plot(x_m, y_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
-xlabel('Stroke [m]');
-ylabel('Fuerza continua [N]');
-title('Fuerza continua vs. Posición');
-xlim([-12.7 12.7]*10^-3)
+figure('Position', [100, 100, 800, 600]);
+%plot(x_m, F_N, 'r-o', 'LineWidth', 2, 'MarkerSize', 6);
+%hold on
+plot(x_m, y_fit, 'red', 'LineWidth', 2, 'MarkerSize', 6);
+xlabel('Carrera [mm]','Fontsize', 13);
+ylabel('Fuerza continua [N]','Fontsize', 13);
+title('Fuerza continua vs. Posición','Fontsize', 15);
+xlim([0 12.7*2])
 grid on;
 
 % === Plot 2: k(x) vs Stroke ===
-figure;
-plot(x_m, k, 'b-s', 'LineWidth', 2, 'MarkerSize', 6);
-hold on
-plot(x_m, k_fit, 'black', 'LineWidth', 2, 'MarkerSize', 6);
-xlabel('Stroke [m]');
-ylabel('k(x) [N/A]');
-title('Constante de fuerza vs. Posición');
-xlim([-12.7 12.7]*10^-3)
+
+figure('Position', [100, 100, 800, 600]);
+%plot(x_m, k, 'b-s', 'LineWidth', 2, 'MarkerSize', 6);
+%hold on
+plot(x_m2, k_fit, 'blue', 'LineWidth', 2, 'MarkerSize', 6);
+xlabel('Carrera [mm]', 'Fontsize', 13);
+ylabel('K_{motor}(x) [N/A]','Fontsize', 13);
+title('Constante de fuerza vs. Posición','Fontsize', 15);
+xlim([-12.7 12.7])
 grid on;

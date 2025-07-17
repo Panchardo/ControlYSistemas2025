@@ -13,7 +13,7 @@ kem = 15761; % [N/m]
 % kc = (2*pi*freqcubesat1)^2*m_modal_cubesat %[N/m]
 %kc = 2.7955e+07;
 kc = 4e+08/6; % [N/M]
-k_shaker = 5000; % [N/M]
+k_shaker = 500; % [N/M]
 
 M = [m_cubesat 0 0;
     0 m_movil 0;
@@ -30,7 +30,7 @@ L = 1.9e-3; %[H] Inductancia del bobinado (medida a 1000Hz)
 
 Pot_max = 75 ; %[W] Potencia máxima
 I_max = sqrt(Pot_max/R); % [A]
-V_max = sqrt(Pot_max*R); % [V]
+V_max = 40; % [V]
 
 [autovec,autoval]=eig(K,M);
 w=diag(autoval^0.5);
@@ -126,27 +126,27 @@ f_transf = tf(sys)
 
 
 x1x2primaprima = f_transf(7,1)/f_transf(8,1)
-%bode(x1x2primaprima)
+bode(x1x2primaprima)
 
 
 
-A_aument = [A,[0;0;0;0;K_motor/m_movil;-K_motor/m_shaker];0 0 0 0 -K_motor/L K_motor/L -R/L]
+A_aument = [A,[0;0;0;0;K_motor/m_movil;-K_motor/m_shaker];0 0 0 0 -K_motor/L K_motor/L -R/L];
 Bu_nueva = [0 0 0 0 0 0 1/L]';
 Bd_nueva = [Bd;0];
 B_nueva = [Bu_nueva Bd_nueva];
 
-col_corr = [zeros(7,1); K_motor/m_movil;-K_motor/m_shaker]
-C_aument = [Cc col_corr; 0 0 0 0 0 0 1]
-D_aument = [D;[0 0]]
+col_corr = [zeros(7,1); K_motor/m_movil;-K_motor/m_shaker];
+C_aument = [Cc col_corr; 0 0 0 0 0 0 1];
+D_aument = [D;[0 0]];
 sys2 = ss(A_aument,B_nueva,C_aument,D_aument);
-f_transf2 = tf(sys2)
+f_transf2 = tf(sys2);
 
 
-co = ctrb(A_aument, Bu_nueva)  % matriz de controlabilidad
-rank_co = rank(co)
+co = ctrb(A_aument, Bu_nueva);  % matriz de controlabilidad
+rank_co = rank(co);
 
 
-ob = obsv(A_aument, C_aument(8,:)) % Por que usar C_aument(8,:), que es la fila de la aceleracion que mido, hace que dé rango 2?
+ob = obsv(A_aument, C_aument(8,:)); % Por que usar C_aument(8,:), que es la fila de la aceleracion que mido, hace que dé rango 2?
 rank_ob = rank(ob);
 
 if rank_ob == size(A_aument,1)
@@ -163,18 +163,24 @@ wc_corr = 5000; %Frecuencia de corte
 R_control = wc_corr * L;
 
 
-Amp = 1.25*g; %[m/s^2]
+Amp = 2.5*g/2; %[m/s^2]
 f0 = 100; %[Hz]
 
-zita = 0.7;
-wp = wpfreq(f0)
-ba = m_movil*(2*zita+1)*wp
-ksi = m_movil*(2*zita+1)*wp^2*10
+zita_cont = 0.7;
+
+wp = wpfreq(f0);
+
+if Amp < 0.3*g
+    wp = wp/2;
+end
+ba = m_movil*(2*zita_cont+1)*wp
+ksi = m_movil*(2*zita_cont+1)*wp^2*10
 ksia = m_movil*wp^3
 
 %% MUESTREO
 fs = 10e3; % [Hz]
-Ventana = 100;
+Ventana = round(fs/f0);
+%Ventana = 1000; %Sweep
 if f0 <= 100
     ZOH = 10/fs;
 else
@@ -222,9 +228,9 @@ end
 idx_obs = [2 5 7];
 
 % Extraer submatrices de A y B
-A_reduc = A_aument(idx_obs, idx_obs)      % 3x3
-B_reduc = Bu_nueva(idx_obs)               % 3x1
-C_reduc = A_reduc(2,:)         % 1x3, aceleración del plato
+A_reduc = A_aument(idx_obs, idx_obs);      % 3x3
+B_reduc = Bu_nueva(idx_obs);               % 3x1
+C_reduc = A_reduc(2,:);         % 1x3, aceleración del plato
 %p_obs = [-5000, -5000, -5000]  % Polos rápidos (pero no más que el lazo de corriente)
 
 %Lobs = acker(A_reduc', C_reduc', p_obs)'
@@ -243,9 +249,9 @@ Clol = [C_reduc 0]
 
 p_obs_int = [-10000 -10000 -10000 -R/L]; 
 
-Lobs_aum = acker(Alol', Clol', p_obs_int)'
-Li = Lobs_aum(end)
-Lobs = Lobs_aum(1:end-1,1)
+Lobs_aum = acker(Alol', Clol', p_obs_int)';
+Li = Lobs_aum(end);
+Lobs = Lobs_aum(1:end-1,1);
 
 
 
@@ -256,14 +262,14 @@ Lobs = Lobs_aum(1:end-1,1)
  
  [obs_i_num,obs_i_den] = tfdata(iRealVsMed,'v');
  
- bode(iRealVsMed)
+% bode(iRealVsMed)
 %  figure(2)
  %step(sys_obs_i)
  
  sys_obs_x2 = tf(ss(M_obs, Blol,[1 0 0 0],0));
  x2RealVsMed = f_transf2(2,1)/sys_obs_x2;
  %figure(3)
- bode(x2RealVsMed)
+% bode(x2RealVsMed)
  
  [obs_x2_num,obs_x2_den] = tfdata(x2RealVsMed,'v');
 
@@ -321,46 +327,57 @@ H_des = (s*R_des*C_des) / (1 + s*R_des*C_des);
 
 
 %% Filtro pasabajo antialiasing
-f_c_pb1 = 2500; %[Hz]
-R_pb1 = 2000; %[ohm]
+f_c_pb1 = 7000; %[Hz]
+R_pb1 = 15000; %[ohm]
 C_pb1 = 1/(2*pi*f_c_pb1*R_pb1);
 
-R_pb2 = 1000; %[ohm]
+R_pb2 = 5000; %[ohm]
 C_pb2 = C_pb1; %
-
+f_c_pb2 = 1/(2*pi*C_pb2*R_pb2);
 
 H_antial1 = tf([0 1],[R_pb1*C_pb1 1]);
 H_antial2 = tf([0 1],[R_pb2*C_pb1 1]);
 
 H_antial = H_antial1 * H_antial2;
+
+
+%pasaalto = tf([1 0], [1 1])
+%H_antial = H_antial * pasaalto
 [num_anti,den_anti] = tfdata(H_antial,'v');
+%bode(H_antial)
 %% ADC
-n = 12; %bits
+n_adc = 12; %bits
 Vmin_ADC = 0; % [V]
 Vmax_ADC= 3.3;% [V]
 
 %% Filtro pasabanda
-
+if f0 <= 10
+    deltaf = 5;
+else
+    deltaf= 10;
+end
 N   = 10;   % Order
-Fc1 = f0-10;  % First Cutoff Frequency
-Fc2 = f0+10;  % Second Cutoff Frequency
+Fc1 = f0-deltaf;  % First Cutoff Frequency
+Fc2 = f0+deltaf;  % Second Cutoff Frequency
 
 % Construct an FDESIGN object and call its BUTTER method.
 h  = fdesign.bandpass('N,F3dB1,F3dB2', N, Fc1, Fc2, fs);
 Hd_pasabanda = design(h, 'butter');
-sos = Hd_pasabanda.sosMatrix
-scaleV = Hd_pasabanda.ScaleValues
+sos = Hd_pasabanda.sosMatrix;
+scaleV = Hd_pasabanda.ScaleValues;
 
+%% RANDOM VIBRATIONS
+Amp_rand = 8.03*g;
 %%
 function wp = wpfreq(f)
     % Tabla de frecuencia (Hz) y valores correspondientes de wp
     freq_table = [ ...
           5,  10,  20,  25,  30,  40,  50,  60,  70,  80, ...
-         90, 100, 200, 300, 400, 500, 600,700,739,800, 853, 1000, 1134,1200, 1300, 1450, 1500, 2000];
+         90, 100, 200, 300, 400, 500, 600,700,800, 900, 1000, 1100,1200, 1300, 1450, 1500,1800, 2000];
 
     wp_table = [ ...
-         20,  15,  18,  20,  22,  25,  25,  25,  30,  30, ...
-         40,  40,  50,  50,  70, 120,120,120, 250, 120, 200,  200, 100,150, 200, 200,  120,  200];
+         20,  15,  18,  20,  22,  25,  30,  25,  30,  30, ...
+         30,  40,  50,  50,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
 
     % Interpolación lineal
     wp = interp1(freq_table, wp_table, f, 'linear', 'extrap');
