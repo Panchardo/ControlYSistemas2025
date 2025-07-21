@@ -39,3 +39,9 @@ sensor_out = lsim(Hs, ruido, t);
 % Graficar
 plot(t, sensor_out), xlabel('t [s]'), ylabel('Señal [g]')
 title('Salida del acelerómetro con ruido interno')
+
+figure('Position', [100, 100, 800, 600]);
+bode(Hs)
+
+grid on
+
