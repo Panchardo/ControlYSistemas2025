@@ -2,20 +2,25 @@ clear
 clc
 close all
 
-freqcubesat1 = 1134; % [Hz].
 
+%esc = 1;
+freqcubesat1 = 1208; % [Hz].
+f0 = 17; %[Hz]
+masa_eff_ratio_1 = 0.15;
+m_cubesat =0.41; %[kg]
 
-m_movil = 0.94; % [kg] Masa plato + bobina
-m_cubesat = 1.33; %[kg] Masa Cubesat
-m_shaker = 100; %[kg]
-%m_modal_cubesat = 1
-kem = 15761; % [N/m]
-% kc = (2*pi*freqcubesat1)^2*m_modal_cubesat %[N/m]
+m_cubesat_modo1 = m_cubesat*masa_eff_ratio_1; %MASA MODAL
+
+m_movil = (0.94 + m_cubesat*(1-masa_eff_ratio_1)); % [kg] Masa plato + bobina
+m_shaker = 97.5; %[kg]
+kem = 15761; % [N/m]:
+kc = (2*pi*freqcubesat1)^2*m_cubesat_modo1 %[N/m]
 %kc = 2.7955e+07;
-kc = 4e+08/6; % [N/M]
-k_shaker = 500; % [N/M]
+%kc = (2*pi*freqcubesat1)^2*m_cubesat %[N/m]
+%kc = 4e+08/6; % [N/M]
+k_shaker = 500; % [N/m]
 
-M = [m_cubesat 0 0;
+M = [m_cubesat_modo1 0 0;
     0 m_movil 0;
     0 0 m_shaker];
 K = [kc -kc 0;
@@ -114,20 +119,10 @@ Du = [zeros(7,1);1/M(2,2);-1/M(3,3)];
 Dd = [zeros(7,1);-1/M(2,2);0];
 D = [Du,Dd];
 sys = ss(A, [Bu,Bd], Cc, D);
-f_transf = tf(sys)
-
-% for i = 1:9
-%     figure;
-%     bode(sys(i,1));  % i-ésima salida respecto a la entrada
-%     title(['Bode - Salida ', num2str(i)]);
-%     grid on;
-% end
-% step(sys(7:9))
 
 
-x1x2primaprima = f_transf(7,1)/f_transf(8,1)
-bode(x1x2primaprima)
-
+%x1x2primaprima = f_transf(7,1)/f_transf(8,1)
+%bode(x1x2primaprima)
 
 
 A_aument = [A,[0;0;0;0;K_motor/m_movil;-K_motor/m_shaker];0 0 0 0 -K_motor/L K_motor/L -R/L];
@@ -155,7 +150,7 @@ else
     disp(['NO es observable. Rank = ', num2str(rank_ob)]);
 end
 ob_reducida = rref(ob);
-
+conditonal = cond(ob)
 
 K_motor_virtual = K_motor;
 
@@ -163,50 +158,57 @@ wc_corr = 5000; %Frecuencia de corte
 R_control = wc_corr * L;
 
 
-Amp = 2.5*g/2; %[m/s^2]
-f0 = 100; %[Hz]
+Amp = 2.5*g; %[m/s^2]
+
 
 zita_cont = 0.7;
 
-wp = wpfreq(f0);
+wp = wpfreq(f0)*0.8;
 
 if Amp < 0.3*g
     wp = wp/2;
 end
-ba = m_movil*(2*zita_cont+1)*wp
-ksi = m_movil*(2*zita_cont+1)*wp^2*10
-ksia = m_movil*wp^3
+ba = m_movil*(2*zita_cont+1)*wp;
+ksi = m_movil*(2*zita_cont+1)*wp^2*10;
+ksia = m_movil*wp^3;
 
 %% MUESTREO
 fs = 10e3; % [Hz]
-Ventana = round(fs/f0);
-%Ventana = 1000; %Sweep
+%Ventana = round(fs/f0);
+Ventana = 1000; %Sweep
 if f0 <= 100
     ZOH = 10/fs;
 else
     ZOH = 1/fs;
 end
+%% OBSERVADOR DE ESTADOS
+A_reduc = [0,1,0;-2761925.62328352,-90.8032596041909,40.0465657741560;0,-27157.8947368421,-1578.94736842105];      % 3x3
+B_reduc = [0;0;526.315789473684];               % 3x1
+C_reduc = [-2761925.62328352,-90.8032596041909,40.0465657741560];         % 1x3, aceleración del plato
 
-%% -------------------------------
-% OBSERVADOR DE ESTADOS
-% -------------------------------
-% Indices de los estados a mantener: pos2 (2), vel2 (5), corriente (7)
-% %% Matrices reducidas del sistema
+% %% -------------------------------
+% % OBSERVADOR DE ESTADOS
+% % -------------------------------
+% % Indices de los estados a mantener: pos2 (2), vel2 (5), corriente (7)
+% % %% Matrices reducidas del sistema
+% ESC = diag([1e-3 0.1, 1]); %[mm dm A]
+% ESCINV = diag([1/1e-3 1/0.1, 1/1]);
 % idx_obs = [2 5 7];  % pos2, vel2, i
-% A_reduc = A_aument(idx_obs, idx_obs);
-% B_reduc = Bu_nueva(idx_obs);
-% C_reduc = A_reduc(2,:);  % Observamos aceleración del plato (estado 2)
+% A_reduc = ESCINV*A_aument(idx_obs, idx_obs)*ESC
+% B_reduc = ESCINV*Bu_nueva(idx_obs);
+% C_reduc = A_reduc(2,:)*ESC;  % Observamos aceleración del plato (estado 2)
 % 
-% %% Construcción del sistema aumentado con acción integral
-% Alol = [A_reduc, [0;1;0];     % añadimos estado integrador
-%          C_reduc, 0];          % dinámica del integrador
-% Blol = [B_reduc; 0];          % entrada al sistema aumentado
-% Bdlol = [0 1 0]';
-% Clol = [C_reduc, 0];          % salida
+%% Construcción del sistema aumentado con acción integral
+ Alol = [A_reduc, [0;1;0];     % añadimos estado integrador
+          C_reduc, 0];          % dinámica del integrador
+ Blol = [B_reduc; 0];          % entrada al sistema aumentado
+ Bdlol = [0 1 0]';
+ Clol = [C_reduc, 0];          % salida
+
 % 
 % %% Parámetros de diseño (ruido)
-% Q_kal = diag([1e-7 1e-7 1e-3 1000]);  % incertidumbre del proceso
-% R_kal = 1;                         % ruido del sensor
+% Q_kal = diag([1e-4 1e-3 1e-3 1000]);  % incertidumbre del proceso
+% R_kal =0.001;                         % ruido del sensor
 % 
 % %% Filtro de Kalman (observador)
 % [L_kal, P, E] = lqe(Alol, eye(4), Clol, Q_kal, R_kal);
@@ -220,38 +222,37 @@ end
 % disp('Ganancia del integrador:')
 % disp(Li)
 
-%% OBSERVADOR CON ACKER
-% %% -------------------------------
-% % OBSERVADOR DE ESTADOS
-% % -------------------------------
-% % Indices de los estados a mantener: pos2 (2), vel2 (5), corriente (7)
-idx_obs = [2 5 7];
-
-% Extraer submatrices de A y B
-A_reduc = A_aument(idx_obs, idx_obs);      % 3x3
-B_reduc = Bu_nueva(idx_obs);               % 3x1
-C_reduc = A_reduc(2,:);         % 1x3, aceleración del plato
-%p_obs = [-5000, -5000, -5000]  % Polos rápidos (pero no más que el lazo de corriente)
-
-%Lobs = acker(A_reduc', C_reduc', p_obs)'
-%disp('Ganancia del observador L:');
-%disp(Lobs);
-
-
-%% GANANCIA INTEGRAL
-tol = 1e-7;
-Alol = [A_reduc [0 1 0]';C_reduc 0]
-Blol = [B_reduc;0]
-Bdlol = [0 1 0]';
-Clol = [C_reduc 0]
-
-[Abar_reduc,Bbar_reduc,Cbar_reduc,T_reduc,k_reduc] = obsvf(Alol,Blol,Clol, tol)
-
-p_obs_int = [-10000 -10000 -10000 -R/L]; 
-
-Lobs_aum = acker(Alol', Clol', p_obs_int)';
-Li = Lobs_aum(end);
-Lobs = Lobs_aum(1:end-1,1);
+% %% OBSERVADOR CON ACKER
+% % %% -------------------------------
+% % % OBSERVADOR DE ESTADOS
+% % % -------------------------------
+% % % % Indices de los estados a mantener: pos2 (2), vel2 (5), corriente (7)
+% idx_obs = [2 5 7];
+% % Extraer submatrices de A y B
+% A_reduc = A_aument(idx_obs, idx_obs);      % 3x3
+% B_reduc = Bu_nueva(idx_obs);               % 3x1
+% C_reduc = A_reduc(2,:);         % 1x3, aceleración del plato
+% %p_obs = [-5000, -5000, -5000]  % Polos rápidos (pero no más que el lazo de corriente)
+% 
+% %Lobs = acker(A_reduc', C_reduc', p_obs)'
+% %disp('Ganancia del observador L:');
+% %disp(Lobs);
+% 
+% 
+% %% GANANCIA INTEGRAL
+ tol = 1e-7;
+% Alol = [A_reduc [0 1 0]';C_reduc 0];
+% Blol = [B_reduc;0];
+% Bdlol = [0 1 0]';
+% Clol = [C_reduc 0];
+% 
+ [Abar_reduc,Bbar_reduc,Cbar_reduc,T_reduc,k_reduc] = obsvf(Alol,Blol,Clol, tol);
+% 
+ p_obs_int = [-10000 -10000 -1000000 -R/L]; 
+% 
+ Lobs_aum = acker(Alol', Clol', p_obs_int)';
+ Li = Lobs_aum(end);
+ Lobs = Lobs_aum(1:end-1,1);
 
 
 
@@ -261,15 +262,21 @@ Lobs = Lobs_aum(1:end-1,1);
  iRealVsMed = f_transf2(10,1)/sys_obs_i;
  
  [obs_i_num,obs_i_den] = tfdata(iRealVsMed,'v');
+  
+ figure(2)
+ bode(iRealVsMed)
  
-% bode(iRealVsMed)
+ iRealVsMed_disc = c2d(iRealVsMed, 1/fs, 'tustin');
+ [obs_i_num,obs_i_den] = tfdata(iRealVsMed_disc,'v');
+ 
+
 %  figure(2)
  %step(sys_obs_i)
  
  sys_obs_x2 = tf(ss(M_obs, Blol,[1 0 0 0],0));
  x2RealVsMed = f_transf2(2,1)/sys_obs_x2;
- %figure(3)
-% bode(x2RealVsMed)
+figure(3)
+ bode(x2RealVsMed)
  
  [obs_x2_num,obs_x2_den] = tfdata(x2RealVsMed,'v');
 
@@ -367,8 +374,22 @@ sos = Hd_pasabanda.sosMatrix;
 scaleV = Hd_pasabanda.ScaleValues;
 
 %% RANDOM VIBRATIONS
-Amp_rand = 8.03*g;
+rms_rand = 4*g;
 %%
+% function wp = wpfreq(f)
+%     % Tabla de frecuencia (Hz) y valores correspondientes de wp
+%     freq_table = [ ...
+%           5,  10,  20,  25,  30,  40,  50,  60,  70,  80, ...
+%          90, 100, 200, 300, 400, 500, 600,700,800, 900, 1000, 1100,1200, 1300, 1450, 1500,1800, 2000];
+% 
+%     wp_table = [ ...
+%          20,  15,  18,  20,  22,  25,  30,  25,  30,  30, ...
+%          30,  40,  50,  50,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
+% 
+%     % Interpolación lineal
+%     wp = interp1(freq_table, wp_table, f, 'linear', 'extrap');
+% end %% 23/7/2025
+
 function wp = wpfreq(f)
     % Tabla de frecuencia (Hz) y valores correspondientes de wp
     freq_table = [ ...
@@ -376,8 +397,8 @@ function wp = wpfreq(f)
          90, 100, 200, 300, 400, 500, 600,700,800, 900, 1000, 1100,1200, 1300, 1450, 1500,1800, 2000];
 
     wp_table = [ ...
-         20,  15,  18,  20,  22,  25,  30,  25,  30,  30, ...
-         30,  40,  50,  50,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
+         20,  10,  15,  15,  15,  15,  15,  18,  20,  20, ...
+         30,  17,  25,  30,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
 
     % Interpolación lineal
     wp = interp1(freq_table, wp_table, f, 'linear', 'extrap');
