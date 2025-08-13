@@ -8,9 +8,9 @@ wp_vals = arrayfun(@wpfreq, f_vals);
 figure('Position', [100, 100, 800, 600]);
 plot(f_vals, wp_vals, 'b-', 'LineWidth', 2);
 grid on;
-xlabel('Frecuencia (Hz)');
+xlabel('f_0 (Hz)');
 ylabel('\omega_p (rad/s)');
-title('\omega_p vs Frecuencia');
+title('\omega_p vs f_0');
 
 
 function wp = wpfreq(f)
@@ -20,8 +20,8 @@ function wp = wpfreq(f)
          90, 100, 200, 300, 400, 500, 600,700,800, 900, 1000, 1100,1200, 1300, 1450, 1500,1800, 2000];
 
     wp_table = [ ...
-         20,  10,  15,  15,  15,  15,  15,  18,  20,  20, ...
-         30,  17,  25,  30,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
+         10,  10,  15,  15,  15,  15,  15,  18,  20,  20, ...
+         30,  17,  25,  30,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,120,  120];
 
     % Interpolación lineal
     wp = interp1(freq_table, wp_table, f, 'linear', 'extrap');

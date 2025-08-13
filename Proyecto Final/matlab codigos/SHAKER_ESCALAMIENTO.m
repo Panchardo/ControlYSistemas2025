@@ -5,7 +5,7 @@ close all
 
 %esc = 1;
 freqcubesat1 = 1208; % [Hz].
-f0 = 10; %[Hz]
+f0 = 100; %[Hz]
 masa_eff_ratio_1 = 0.15;
 m_cubesat =0.41; %[kg]
 
@@ -176,7 +176,7 @@ wc_corr = 5000; %Frecuencia de corte
 R_control = wc_corr * L;
 
 
-Amp = 2.5*g; %[m/s^2]
+Amp = 0.15*g; %[m/s^2]
 
 
 zita_cont = 0.7;
@@ -192,8 +192,8 @@ ksia = m_movil*wp^3;
 
 %% MUESTREO
 fs = 10e3; % [Hz]
-%Ventana = round(fs/f0);
-Ventana = 1000; %Sweep
+Ventana = round(fs/f0);
+%Ventana = 1000; %Sweep
 if f0 <= 100
     ZOH = 10/fs;
 else
@@ -372,7 +372,7 @@ Vmax_ADC= 3.3;% [V]
 
 %% Filtro pasabanda
 if f0 <= 10
-    deltaf = 5;
+    deltaf = 2;
 else
     deltaf= 10;
 end
@@ -410,8 +410,8 @@ function wp = wpfreq(f)
          90, 100, 200, 300, 400, 500, 600,700,800, 900, 1000, 1100,1200, 1300, 1450, 1500,1800, 2000];
 
     wp_table = [ ...
-         20,  10,  15,  15,  15,  15,  15,  18,  20,  20, ...
-         30,  17,  25,  30,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,90,  100];
+         10,  10,  15,  15,  15,  15,  15,  18,  20,  20, ...
+         30,  17,  25,  30,  35, 35,40,60, 80, 80,  100, 100,100, 100, 100,  120,120,  120];
 
     % Interpolación lineal
     wp = interp1(freq_table, wp_table, f, 'linear', 'extrap');

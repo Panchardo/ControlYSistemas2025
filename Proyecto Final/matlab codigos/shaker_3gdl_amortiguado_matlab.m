@@ -5,7 +5,7 @@ close all
 
 %esc = 1;
 freqcubesat1 = 1208; % [Hz].
-f0 = 17; %[Hz]
+f0 = 10; %[Hz]
 masa_eff_ratio_1 = 0.15;
 m_cubesat =0.41; %[kg]
 
@@ -158,7 +158,7 @@ wc_corr = 5000; %Frecuencia de corte
 R_control = wc_corr * L;
 
 
-Amp = 2.5*g; %[m/s^2]
+Amp = 4*g; %[m/s^2]
 
 
 zita_cont = 0.7;
@@ -168,6 +168,9 @@ wp = wpfreq(f0)*0.8;
 if Amp < 0.3*g
     wp = wp/2;
 end
+
+wp = 3;
+
 ba = m_movil*(2*zita_cont+1)*wp;
 ksi = m_movil*(2*zita_cont+1)*wp^2*10;
 ksia = m_movil*wp^3;
@@ -374,7 +377,7 @@ sos = Hd_pasabanda.sosMatrix;
 scaleV = Hd_pasabanda.ScaleValues;
 
 %% RANDOM VIBRATIONS
-rms_rand = 4*g;
+rms_rand = 2*g; %Wp = 10 de 1g a 2g, Wp = 15 de 2g a 5g
 %%
 % function wp = wpfreq(f)
 %     % Tabla de frecuencia (Hz) y valores correspondientes de wp
