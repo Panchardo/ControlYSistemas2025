@@ -1,4 +1,11 @@
+clear
+clc
+close all
 
+% === CARGA ===
+archivo = 'sweep_10-36hz-0,15g.mat'; % ← Cambia si es necesario
+data = load(archivo);
+out = data.out;
 
 % Asumiendo que las señales están en estructuras Simulink con campos .time y .signals.values
 y = out.filtrado.signals.values;           % Señal filtrada
